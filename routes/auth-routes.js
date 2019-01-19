@@ -8,6 +8,10 @@ const redirect_uri = require("../config/redirect_uri").redirect_uri;
 
 const horrible = express();
 
+//  Init passport
+horrible.use(passport.initialize());
+horrible.use(passport.session());
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -59,6 +63,7 @@ passport.use(
           return;
           done(null, currentUser);
         } else {
+          console.log(`User not found in database`);
           new User({
             twitchId: profile.id,
             displayName: profile._json.display_name,
