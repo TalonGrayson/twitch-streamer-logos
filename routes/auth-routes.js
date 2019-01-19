@@ -4,6 +4,7 @@ const passport = require("passport");
 const TwitchStrategy = require("passport-twitch").Strategy;
 const User = require("../models/User");
 const keys = require("../config/keys");
+const redirect_uri = require("../config/redirect_uri").redirect_uri;
 
 const horrible = express();
 
@@ -39,8 +40,7 @@ passport.use(
     {
       clientID: keys.twitch.TWITCH_CLIENT_ID,
       clientSecret: keys.twitch.TWITCH_CLIENT_SECRET,
-      callbackURL:
-        "https://twitch-streamer-logos-stage.herokuapp.com/auth/twitch/redirect",
+      callbackURL: redirect_uri,
       scope: "user_read"
     },
     function(accessToken, refreshToken, profile, done) {
