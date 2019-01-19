@@ -39,7 +39,8 @@ passport.use(
     {
       clientID: keys.twitch.TWITCH_CLIENT_ID,
       clientSecret: keys.twitch.TWITCH_CLIENT_SECRET,
-      callbackURL: "/auth/twitch/redirect",
+      callbackURL:
+        "https://twitch-streamer-logos-stage.herokuapp.com/auth/twitch/redirect",
       scope: "user_read"
     },
     function(accessToken, refreshToken, profile, done) {
