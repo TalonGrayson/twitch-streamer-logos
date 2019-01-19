@@ -1,0 +1,28 @@
+{
+  "name": "twitch-logos",
+  "version": "1.0.0",
+  "description": "Simple API and UI for getting Twitch streamer logos",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TalonGrayson/twitch-streamer-logos.git"
+  },
+  "keywords": [],
+  "author": "TalonGrayson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TalonGrayson/twitch-streamer-logos/issues"
+  },
+  "homepage": "https://github.com/TalonGrayson/twitch-streamer-logos#readme",
+  "dependencies": {
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.5",
+    "passport": "^0.4.0",
+    "passport-twitch": "^1.0.3"
+  }
+}

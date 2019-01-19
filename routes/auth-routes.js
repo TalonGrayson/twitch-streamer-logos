@@ -1,0 +1,55 @@
+const router = require("express").Router();
+const passport = require("passport");
+const TwitchStrategy = require("passport-twitch").Strategy;
+const User = require("../models/User");
+const keys = require("../config/keys");
+
+//  Define our auth routes
+router.get(
+  "/twitch",
+  passport.authenticate("twitch", { scope: ["user_read"] })
+);
+
+router.get("/twitch/redirect", passport.authenticate("twitch"), (req, res) => {
+  res.send("Authenticated");
+});
+
+//  Setting up Twitch OAuth 2.0
+passport.use(
+  new TwitchStrategy(
+    {
+      clientID: keys.twitch.TWITCH_CLIENT_ID,
+      clientSecret: keys.twitch.TWITCH_CLIENT_SECRET,
+      callbackURL: "/auth/twitch/redirect",
+      scope: "user_read"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      //  Logging profile for reference (remove later)
+      console.log(profile);
+
+      //  Look for user in db
+      User.findOne({ twitchId: profile.id }).then(currentUser => {
+        //  If the user exists, log their name
+        //  If not, create the user on mongoDB
+        if (currentUser) {
+          console.log(`Existing User Found: ${currentUser.name}`);
+          done(null, currentUser);
+        } else {
+          new User({
+            twitchId: profile.id,
+            displayName: profile._json.display_name,
+            name: profile._json.name,
+            avatar: profile._json.logo
+          })
+            .save()
+            .then(newUser => {
+              console.log(`New User Created: ${newUser.displayName}`);
+              done(null, newUser);
+            });
+        }
+      });
+    }
+  )
+);
+
+module.exports = router;
