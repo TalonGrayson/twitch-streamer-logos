@@ -1,8 +1,21 @@
 const router = require("express").Router();
+const express = require("express");
 const passport = require("passport");
 const TwitchStrategy = require("passport-twitch").Strategy;
 const User = require("../models/User");
 const keys = require("../config/keys");
+
+const horrible = express();
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
 
 //  Define our auth routes
 router.get(
@@ -12,6 +25,12 @@ router.get(
 
 router.get("/twitch/redirect", passport.authenticate("twitch"), (req, res) => {
   res.send("Authenticated");
+});
+
+//  Log out
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 //  Setting up Twitch OAuth 2.0
@@ -33,6 +52,10 @@ passport.use(
         //  If not, create the user on mongoDB
         if (currentUser) {
           console.log(`Existing User Found: ${currentUser.name}`);
+          horrible.get(`/${currentUser.name}`, (req, res) => {
+            res.json(currentUser);
+          });
+          return;
           done(null, currentUser);
         } else {
           new User({
