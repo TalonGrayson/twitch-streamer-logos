@@ -17,16 +17,16 @@ const authCheck = (req, res, next) => {
 };
 
 //  Get the streamer's profile
-router.get("/:streamer", authCheck, (req, res) => {
+router.get("/:streamer", (req, res) => {
   User.findOne({ name: req.params.streamer.trim().toLowerCase() }).then(
     streamer => {
       if (streamer) {
         //  If the user is logged in and this is their profile
         if (req.user && req.user.id === streamer.id) {
-          res.send("This is your profile");
+          res.json(req.user);
         } else {
           //  They're either not logged in, or they're logged in but it's not their profile
-          res.send("This is not your profile");
+          res.json(streamer);
         }
       } else {
         res
