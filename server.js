@@ -2,9 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const authRoutes = require("./routes/auth-routes");
+const apiRoutes = require("./routes/api-routes");
 const passport = require("passport");
+const passportSetup = require("./config/passport-setup");
 const cookieSession = require("cookie-session");
-const User = require("./models/User");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,8 +16,6 @@ app.use(
     keys: [keys.session.cookieKey]
   })
 );
-
-app.use("/auth", authRoutes);
 
 //  Init passport
 app.use(passport.initialize());
@@ -32,36 +31,12 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
+//  Routes
+app.use("/auth", authRoutes);
+app.use("/frand", apiRoutes);
+
 app.get("/", (req, res) => {
   res.json({ THREE6TEEN: "Hogan" });
-});
-
-app.get("/api/:streamer", (req, res) => {
-  User.findOne({ name: req.params.streamer.trim().toLowerCase() }).then(
-    streamer => {
-      if (streamer) {
-        res.json(streamer);
-      } else {
-        res
-          .status(404)
-          .send({ error: `We don't have that streamer in our database` });
-      }
-    }
-  );
-});
-
-app.get("/api/:streamer/logo", (req, res) => {
-  User.findOne({ name: req.params.streamer.trim().toLowerCase() }).then(
-    streamer => {
-      if (streamer) {
-        res.send(streamer.avatar);
-      } else {
-        res
-          .status(404)
-          .send({ error: `We don't have that streamer in our database` });
-      }
-    }
-  );
 });
 
 app.listen(port, () => {

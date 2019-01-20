@@ -5,6 +5,7 @@ const UserSchema = new Schema({
   twitchId: String,
   displayName: String,
   name: String,
+  bio: String,
   avatar: String,
   logo: String
 });
