@@ -22,20 +22,26 @@ router.get("/:streamer", (req, res) => {
     streamer => {
       if (streamer) {
         //  If the user is logged in and this is their profile
+        //  Include their Twitch ID in the JSON
         if (req.user && req.user.id === streamer.id) {
           res.json({
-            name: req.user.name,
-            displayName: req.user.displayName,
-            bio: req.user.bio,
-            avatar: req.user.avatar
+            yourProfile: true,
+            twitchId: streamer.twitchId,
+            name: streamer.name,
+            displayName: streamer.displayName,
+            bio: streamer.bio,
+            avatar: streamer.avatar,
+            logo: streamer.logo ? streamer.logo : streamer.avatar
           });
         } else {
           //  They're either not logged in, or they're logged in but it's not their profile
           res.json({
+            yourProfile: false,
             name: streamer.name,
             displayName: streamer.displayName,
             bio: streamer.bio,
-            avatar: streamer.avatar
+            avatar: streamer.avatar,
+            logo: req.user.logo ? req.user.logo : req.user.avatar
           });
         }
       } else {

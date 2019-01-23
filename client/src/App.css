@@ -1,14 +1,11 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
 
-.App-header {
-  background-color: #282c34;
+.App {
+  text-align: center;
+  background-color: #2a223f;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,6 +13,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-top: -80px;
 }
 
 .App-link {
@@ -29,4 +27,77 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.streamer-name-search {
+  position: absolute;
+  left: 35vw;
+  top: 20vh;
+}
+
+input[type="text"] {
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  height: 50px;
+  width: 30vw;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.navbar-shaded {
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+.padding-12 {
+  padding: 12px;
+}
+
+.btn-twitch {
+  color: white;
+  background-color: #6441a4;
+  padding: 8px 12px 12px 12px;
+  border-radius: 6px;
+}
+
+.btn-twitch:hover,
+.btn-twitch:focus,
+.btn-twitch:active,
+.btn-twitch.active {
+  color: white;
+  background-color: #6441a4;
+  text-decoration: none;
+}
+
+.btn-shadow {
+  -webkit-box-shadow: inset 0px -2px 1px 0px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: inset 0px -2px 1px 0px rgba(0, 0, 0, 0.48);
+  box-shadow: inset 0px -2px 1px 0px rgba(0, 0, 0, 0.48);
+}
+
+.btn-icon {
+  height: 18px;
+  width: 18px;
+}
+
+.logo {
+  position: absolute;
+  top: 30vh;
+  max-height: 35vh;
+}
+
+.bio {
+  position: absolute;
+  top: 70vh;
+  font-size: normal;
 }
