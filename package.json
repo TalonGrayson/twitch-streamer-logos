@@ -9,7 +9,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "help": "echo \"'npm run server' for backend :: 'npm run client' for frontend :: 'npm run dev' for concurrent front and back ends\""
+    "help": "echo \"'npm run server' for backend :: 'npm run client' for frontend :: 'npm run dev' for concurrent front and back ends\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
