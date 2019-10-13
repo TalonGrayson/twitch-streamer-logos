@@ -38,7 +38,7 @@ export default class FrandProfile extends Component {
   handleSubmit(event) {
     event.preventDefault();
     axios.get(`/api/v1/streamer/${this.state.streamer}`).then(res => {
-      if (res.status === 200) {
+      if (res.data.displayName) {
         this.setState({
           streamer: res.data.displayName,
           logo: res.data.logo,
@@ -47,7 +47,12 @@ export default class FrandProfile extends Component {
           bioClass: "bio animated fadeInUp"
         });
       } else {
-        this.setState(initialState);
+        this.setState({
+          streamer: this.state.streamer,
+          logo: Glitch,
+          bio: "Oops, we couldn't find that streamer in our database!",
+          bioClass: "bio animated fadeInUp"
+        });
       }
     });
   }
@@ -55,13 +60,15 @@ export default class FrandProfile extends Component {
   render() {
     return (
       <div className="App">
-        <SearchBar
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          streamerInfo={this.state}
-        />
-        <TwitchLogo streamerInfo={this.state} />
-        <Bio streamerInfo={this.state} />
+        <div className="streamer-info-container">
+          <SearchBar
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            streamerInfo={this.state}
+          />
+          <TwitchLogo streamerInfo={this.state} />
+          <Bio streamerInfo={this.state} />
+        </div>
       </div>
     );
   }

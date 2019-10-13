@@ -4,41 +4,23 @@ import { Link } from "react-router-dom";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark navbar-shaded mb-4">
+      <nav className="navbar navbar-dark navbar-shaded">
         <div className="container">
           <Link to="/" className="navbar-brand">
             Streamer Logos
           </Link>
+
           <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobile-nav"
+            className="btn-twitch btn-shadow"
+            onClick={this.props.authTwitch}
           >
-            <span className="navbar-toggler-icon" />
+            <img
+              className="btn-icon"
+              src={require("../../img/Glitch_White_RGB.png")}
+              alt="Glitch"
+            />
+            &nbsp;Login with Twitch
           </button>
-
-          <div className="collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item" />
-            </ul>
-
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <button
-                  className="btn-twitch btn-shadow"
-                  onClick={this.props.authTwitch}
-                >
-                  <img
-                    className="btn-icon"
-                    src={require("../../img/Glitch_White_RGB.png")}
-                    alt="Glitch"
-                  />
-                  &nbsp;Login with Twitch
-                </button>
-              </li>
-            </ul>
-          </div>
         </div>
       </nav>
     );

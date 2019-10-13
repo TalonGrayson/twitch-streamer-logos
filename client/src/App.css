@@ -16,6 +16,10 @@
   margin-top: -80px;
 }
 
+.streamer-info-container {
+  margin-top: 128px;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -30,9 +34,6 @@
 }
 
 .streamer-name-search {
-  position: absolute;
-  left: 35vw;
-  top: 20vh;
 }
 
 input[type="text"] {
@@ -68,6 +69,7 @@ input[type="text"]:focus {
   background-color: #6441a4;
   padding: 8px 12px 12px 12px;
   border-radius: 6px;
+  border: 0;
 }
 
 .btn-twitch:hover,
@@ -77,6 +79,7 @@ input[type="text"]:focus {
   color: white;
   background-color: #6441a4;
   text-decoration: none;
+  border: 0;
 }
 
 .btn-shadow {
@@ -92,6 +95,7 @@ input[type="text"]:focus {
 
 .logo {
   max-height: 300px;
+  padding: 24px 0 24px 0;
 }
 
 .bio {

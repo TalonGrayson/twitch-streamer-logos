@@ -46,7 +46,7 @@ router.get("/:streamer", (req, res) => {
         } else {
           //  They're not logged in
           res.json({
-            yourProfile: true,
+            yourProfile: false,
             twitchId: streamer.twitchId,
             name: streamer.name,
             displayName: streamer.displayName,
@@ -56,9 +56,15 @@ router.get("/:streamer", (req, res) => {
           });
         }
       } else {
-        res
-          .status(404)
-          .send({ error: `We don't have that streamer in our database` });
+        res.json({
+          yourProfile: false,
+          twitchId: "",
+          name: "",
+          displayName: "",
+          bio: "",
+          avatar: "",
+          logo: ""
+        });
       }
     }
   );

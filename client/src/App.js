@@ -10,7 +10,11 @@ import FrandProfile from "./components/layout/FrandProfile";
 
 export default class App extends Component {
   authTwitch = () => {
-    axios.get("/auth/twitch").then(console.log("Authing..."));
+    axios
+      .get("/auth/twitch", {
+        headers: { "Access-Control-Allow-Origin": "*" }
+      })
+      .then(console.log("Authing..."));
   };
 
   render() {
