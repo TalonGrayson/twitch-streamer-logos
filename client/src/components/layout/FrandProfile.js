@@ -37,15 +37,19 @@ export default class FrandProfile extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.get(`/api/v1/streamer/${this.state.streamer}`).then(res =>
-      this.setState({
-        streamer: res.data.displayName,
-        logo: res.data.logo,
-        bio: res.data.bio,
-        logoClass: "logo animated bounceIn",
-        bioClass: "bio animated fadeInUp"
-      })
-    );
+    axios.get(`/api/v1/streamer/${this.state.streamer}`).then(res => {
+      if (res.status === 200) {
+        this.setState({
+          streamer: res.data.displayName,
+          logo: res.data.logo,
+          bio: res.data.bio,
+          logoClass: "logo animated bounceIn",
+          bioClass: "bio animated fadeInUp"
+        });
+      } else {
+        this.setState(initialState);
+      }
+    });
   }
 
   render() {

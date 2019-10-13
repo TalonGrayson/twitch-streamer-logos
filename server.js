@@ -6,6 +6,7 @@ const apiRoutes = require("./routes/api-routes");
 const passport = require("passport");
 const passportSetup = require("./config/passport-setup");
 const cookieSession = require("cookie-session");
+const path = require("path");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -33,10 +34,10 @@ mongoose
 app.use("/auth", authRoutes);
 app.use("/api/v1/streamer", apiRoutes);
 
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/public/index.html")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/client/public/index.html"));
 });
 
 app.listen(port, () => {

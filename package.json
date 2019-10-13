@@ -29,6 +29,7 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.5",
     "passport": "^0.4.0",
-    "passport-twitch": "^1.0.3"
+    "passport-twitch": "^1.0.3",
+    "path": "^0.12.7"
   }
 }
