@@ -10,17 +10,14 @@ class Navbar extends Component {
             Streamer Logos
           </Link>
 
-          <button
-            className="btn-twitch btn-shadow"
-            onClick={this.props.authTwitch}
-          >
+          <Link to="/auth/twitch" className="btn-twitch btn-shadow">
             <img
               className="btn-icon"
               src={require("../../img/Glitch_White_RGB.png")}
               alt="Glitch"
             />
             &nbsp;Login with Twitch
-          </button>
+          </Link>
         </div>
       </nav>
     );

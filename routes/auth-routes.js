@@ -8,9 +8,13 @@ router.get(
   passport.authenticate("twitch", { scope: ["user_read"] })
 );
 
-router.get("/twitch/redirect", passport.authenticate("twitch"), (req, res) => {
-  res.redirect(`/api/v1/streamer/${req.user.name}`);
-});
+router.get(
+  "/twitch/redirect",
+  passport.authenticate("twitch", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect(`/api/v1/streamer/${req.user.name}`);
+  }
+);
 
 //  Log out
 router.get("/logout", (req, res) => {
