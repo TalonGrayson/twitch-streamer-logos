@@ -33,8 +33,10 @@ mongoose
 app.use("/auth", authRoutes);
 app.use("/api/v1/streamer", apiRoutes);
 
-app.get("/", (req, res) => {
-  res.json({ THREE6TEEN: "Hogan" });
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 app.listen(port, () => {
