@@ -10,9 +10,7 @@ import FrandProfile from "./components/layout/FrandProfile";
 
 export default class App extends Component {
   authTwitch = () => {
-    axios
-      .get("/auth/twitch", { dataType: "jsonp" })
-      .then(console.log("Authing..."));
+    axios.get("/auth/twitch").then(console.log("Authing..."));
   };
 
   render() {
