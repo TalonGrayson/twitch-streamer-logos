@@ -25,14 +25,17 @@ class Navbar extends Component {
 
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to="/auth/twitch" className="btn-twitch btn-shadow">
+                <button
+                  className="btn-twitch btn-shadow"
+                  onClick={this.props.authTwitch}
+                >
                   <img
                     className="btn-icon"
                     src={require("../../img/Glitch_White_RGB.png")}
                     alt="Glitch"
                   />
                   &nbsp;Login with Twitch
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

@@ -18,16 +18,12 @@ const authCheck = (req, res, next) => {
 
 //  Get the streamer's profile
 router.get("/:streamer", (req, res) => {
-  console.log(req.params.streamer);
-  console.log(req.user);
   User.findOne({ name: req.params.streamer.trim().toLowerCase() }).then(
     streamer => {
       if (streamer) {
-        console.log("We found a streamer with that name");
         //  If the user is logged in and this is their profile
         //  Include their Twitch ID in the JSON
         if (req.user && req.user.id === streamer.id) {
-          console.log("All Good");
           res.json({
             yourProfile: true,
             twitchId: streamer.twitchId,
@@ -39,8 +35,6 @@ router.get("/:streamer", (req, res) => {
           });
         } else if (req.user) {
           //  They're logged in but it's not their profile
-          console.log("They're logged in but it's not their profile");
-          console.log(req.user);
           res.json({
             yourProfile: false,
             name: streamer.name,
@@ -90,7 +84,7 @@ router.get("/:streamer/avatar", (req, res) => {
   User.findOne({ name: req.params.streamer.trim().toLowerCase() }).then(
     streamer => {
       if (streamer) {
-        res.redirect(streamer.avatar);
+        res.json(streamer.avatar);
       } else {
         res
           .status(404)
@@ -106,7 +100,7 @@ router.get("/:streamer/logo", (req, res) => {
     streamer => {
       if (streamer) {
         if (streamer.logo) {
-          res.redirect(streamer.logo);
+          res.json(streamer.logo);
         } else {
           res
             .status(404)

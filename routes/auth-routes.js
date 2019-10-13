@@ -9,7 +9,7 @@ router.get(
 );
 
 router.get("/twitch/redirect", passport.authenticate("twitch"), (req, res) => {
-  res.redirect(`/frand/${req.user.name}`);
+  res.redirect(`/api/v1/streamer/${req.user.name}`);
 });
 
 //  Log out
