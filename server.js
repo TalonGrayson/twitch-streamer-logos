@@ -23,9 +23,7 @@ app.use(passport.session());
 
 mongoose
   .connect(
-    `mongodb://${keys.mongo.MONGO_USERNAME}:${keys.mongo.MONGO_PASSWORD}@${
-      keys.mongo.MONGO_ADDRESS
-    }`,
+    `mongodb://${keys.mongo.MONGO_USERNAME}:${keys.mongo.MONGO_PASSWORD}@${keys.mongo.MONGO_ADDRESS}`,
     { useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB Connected"))

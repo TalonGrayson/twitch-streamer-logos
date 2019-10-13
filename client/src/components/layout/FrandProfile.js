@@ -1,64 +1,63 @@
 import React, { Component } from "react";
 import Glitch from "../../img/Glitch_White_RGB.png";
+import SearchBar from "./SearchBar";
+import TwitchLogo from "./TwitchLogo";
+import Bio from "./Bio";
+import axios from "axios";
 
-export default class TwitchLogo extends Component {
+const initialState = {
+  logoClass: "logo animated bounceIn",
+  bioClass: "bio animated fadeInUp",
+  streamer: "",
+  logo: Glitch,
+  bio: "Find a streamer's logo, or log in an upload your own!"
+};
+
+export default class FrandProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      logoAnimation: "animated bounceIn",
-      bioAnimation: "animated fadeInUp",
-      streamer: "",
-      logo: Glitch,
-      bio:
-        "Watch me do a make! Foam, electronics, 3D printing, sewing, etc. Also some gaming. Lots of swearing, usually."
-    };
+
+    this.state = initialState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({
-      streamer: event.target.value,
-      logoAnimation: "bio animated bounceOut",
-      bioAnimation: "animated fadeOutDown"
-    });
+    if (event.target.value) {
+      this.setState({
+        streamer: event.target.value,
+        logoClass: "logo animated bounceOut",
+        bioClass: "bio animated fadeOutDown"
+      });
+    } else {
+      this.setState(initialState);
+    }
   }
 
   handleSubmit(event) {
-    this.setState({
-      logo:
-        "https://cdn.discordapp.com/attachments/473957043108184065/536016534959816714/Heart-Logo_Love-Making_Trans.png",
-      logoAnimation: "animated bounceIn",
-      bioAnimation: "bio animated fadeInUp"
-    });
     event.preventDefault();
+    axios.get(`/frand/${this.state.streamer}`).then(res =>
+      this.setState({
+        streamer: res.data.displayName,
+        logo: res.data.logo,
+        bio: res.data.bio,
+        logoClass: "logo animated bounceIn",
+        bioClass: "bio animated FadeInUp"
+      })
+    );
   }
 
   render() {
     return (
-      <div>
-        <header className="App">
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              spellCheck="false"
-              className="streamer-name-search"
-              value={this.state.streamer}
-              onChange={this.handleChange}
-              placeholder="Enter a streamer's name here"
-            />
-            <input type="submit" value="Submit" className="hidden" />
-          </form>
-          <img
-            src={this.state.logo}
-            className={"logo " + this.state.logoAnimation}
-            alt={this.state.streamer + "'s logo"}
-          />
-          <div className={"bio " + this.state.bioAnimation}>
-            <p>{this.state.bio}</p>
-          </div>
-        </header>
+      <div className="App">
+        <SearchBar
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          streamerInfo={this.state}
+        />
+        <TwitchLogo streamerInfo={this.state} />
+        <Bio streamerInfo={this.state} />
       </div>
     );
   }

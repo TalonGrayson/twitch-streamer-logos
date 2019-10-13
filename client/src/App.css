@@ -91,13 +91,9 @@ input[type="text"]:focus {
 }
 
 .logo {
-  position: absolute;
-  top: 30vh;
-  max-height: 35vh;
+  max-height: 300px;
 }
 
 .bio {
-  position: absolute;
-  top: 70vh;
   font-size: normal;
 }
