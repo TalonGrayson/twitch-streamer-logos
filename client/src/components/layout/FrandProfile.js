@@ -37,13 +37,13 @@ export default class FrandProfile extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.get(`/frand/${this.state.streamer}`).then(res =>
+    axios.get(`/api/v1/streamer/${this.state.streamer}`).then(res =>
       this.setState({
         streamer: res.data.displayName,
         logo: res.data.logo,
         bio: res.data.bio,
         logoClass: "logo animated bounceIn",
-        bioClass: "bio animated FadeInUp"
+        bioClass: "bio animated fadeInUp"
       })
     );
   }

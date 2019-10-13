@@ -31,7 +31,7 @@ mongoose
 
 //  Routes
 app.use("/auth", authRoutes);
-app.use("/frand", apiRoutes);
+app.use("/api/v1/streamer", apiRoutes);
 
 app.get("/", (req, res) => {
   res.json({ THREE6TEEN: "Hogan" });
